@@ -1,0 +1,89 @@
+# HIV Self Testing 
+
+UNAIDS 90-90-90 targets
+- 90% of people living withi HIV get to learn about their status
+- 90% of positive get put on treatment
+- 90% of those on treatment sustain care << viral supression? 
+- 70% of HIV-positive persons know they are HIV-positive
+
+[USAID Page]:https://aidsfree.usaid.gov/resources/hts-kb/hiv-self-testing/all 
+
+
+HIV Self Testing supports the first 90% through access to testing services. 
+
+
+WHO HIV Testing Services [WHO Page]:http://www.who.int/hiv/topics/vct/en/
+
+
+Assisted Partner Notification and Testing
+- Reaching men through ANC/PNC services (women receiving ANC and PNC care)
+- 
+
+
+
+Peer Educators and Community Health Workers
+
+
+
+Stats
+- 93% acceptability for blood-based test, 75% for oral tests. (PSKenya, usability, Kenya, 2017) [report here]: http://hivst.org/evidence/usability-characteristics-of-hiv-self-tests-in-kenya 
+- WTP $1 - $5. (PSKenya, usability, Kenya, 2017) [report here]: http://hivst.org/evidence/usability-characteristics-of-hiv-self-tests-in-kenya  
+- 98% girls (15 - 19) believe that they can offer HIVST kits to their partners. 17% believe it would be streinous to their relationship. (PSKenya, Youth stigma, Siaya Kenya, 2017) [report here]: http://hivst.org/evidence/perceptions-of-adolescent-girls-about-their-ability-to-offer-hiv-self-test-kits-to-their-sexual-partners-a-pilot-study-in-siaya-county-western-kenya
+- 65% of truckers and 72% of female sex workers chose HIVST. (PSK, SMS service, Kenya, 2018) [report here]: http://hivst.org/evidence/costing-analysis-of-an-sms-based-intervention-to-promote-hiv-self-testing-amongst-truckers-and-sex-workers-in-kenya
+- $10.13 HIVST cost compared to $5.01 if facility based testing (per client tested). 
+- 83% men tested after getting HIVST kit via ANC partner. 72% went for a confirmatory test (PSK, HIVST via ANC/PNC, Kenya, 2016) [report here]: http://hivst.org/evidence/provision-of-oral-hivst-kits-triples-uptake-of-hiv-testing-among-male-partners-of-antenatal-care-clients-results-of-a-randomized-trial-in-kenya
+- (PSK, Kenya, 2017): http://hivst.org/evidence/can-women-safely-distribute-oral-hivst-kits-to-their-sexual-partners-results-from-a-pilot-study-in-kenya 
+	- n = 280 @ 95% FSW, 93% ANC and 86% PNC attendees
+	- distributed HIVST kits to primary sexual partners 
+	- IPV druing 12 months before enrollment was: 44%, 27% and 46% (FSW, ANC, PNC)
+	- IPV in 3 months since study enrollment was: 21%, 13% and 16% (FSW, ANC, PNC) 
+		- 85% with IPV during study had IPV at baseline 
+		- only 4 attributed the IPV to distribution of the kits 
+	- 
+- 94% acceptance, 98% specificity, 89.7% sensitivity(PSK, Kit performance, Kenya, 2016) [report here]:http://hivst.org/evidence/accuracy-and-acceptability-of-oral-fluid-hiv-self-testing-in-a-general-adult-population-in-kenya 
+	- 14.6% HIV prevalence (n = 239). 
+	- 36/239 invalid results - 15%; 95% CI 11 - 20%.
+		- males twice as likely to have invalid results as females 
+	- Kit sensitivity: 89.7% (95% CI 73-98%)
+	- Kit Specificity: 98% (95% CI 89-99%)
+	- WTP: KES 111 mean ($1.25, range( KES 0 - 1000) 
+	
+- 84% confirmed results and 100% same results as facility based (PSK, Kenya, 2016) [report here]: http://hivst.org/evidence/using-peer-educators-to-scale-up-oral-hivst-among-female-sex-workers-an-implementation-science-approach-from-kenya 
+	- 99% acceptance (446/449)
+	- 84% confirmed results 
+	- 100% same results as through facility based testing
+	- 98% enrolled into HIV treatment and prevention services. 
+	
+
+
+PSK
+- Key populations access
+	- Through partner notification by women in ANC/PNC or sexual workers
+	- partner testing - testing together 
+	
+- Adolescent girls
+	- Consent
+	- Partner notification
+	- Usability
+- Stigma
+	- IPV at women and adolscent girls
+	- Discordant partners 
+	- Oral tests and misconception that HIV is spread via saliva 
+	
+	
+- Self Testing Services
+	- Usability
+		- steps to results
+		- sample type (blood, mucosal, etc)
+		- time to results
+		- waste generated 
+		- perception
+		- confidentiality and portability 
+		- self-administration 
+		- self-interpretation of results 
+		
+	- Oral Vs blood-based
+	- pricing 
+	- Kit reliance
+	- Yields 
+
