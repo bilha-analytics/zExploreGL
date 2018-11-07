@@ -1,0 +1,905 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Reasons for Referral}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Table of Contents{}
+
+{{1~~}The Data}
+
+{}"
+data-toc-modified-id="Digital-Referral-Numbers-\/-\/-As-at-\protect\hypertarget{python_84ae92d156d249f28433f1d9a692f71b_48}{}{}-2"\textgreater{}{2~~}Digital
+Referral Numbers - As at
+\protect\hypertarget{python_84ae92d156d249f28433f1d9a692f71b_99}{}{}
+
+{{2.1~~}Reasons for Referrals}
+
+{{2.1.1~~}Approach:}
+
+{{2.1.2~~}Findings:}
+
+{{2.1.2.1~~}Referral Numbers}
+
+{{2.2~~}Timing of Referrals}
+
+{{2.2.1~~}Word Cloud}
+# %load "C:\Users\BILHA\Google Drive\xRepos\xUtilz\TOC-script.txt"
+<h1>Table of Contents<span class="tocSkip"></span></h1>
+<div class="toc"><ul class="toc-item"></ul></div>
+
+<script>
+  function code_toggle() {
+    if (code_shown){
+      $('div.input').hide('500');
+      $('#toggleButton').val('Show Code')
+    } else {
+      $('div.input').show('500');
+      $('#toggleButton').val('Hide Code')
+    }
+    code_shown = !code_shown
+  }
+
+  $( document ).ready(function(){
+    code_shown=false;
+    $('div.input').hide()
+  });
+</script>
+<form action="javascript:code_toggle()"><input type="submit" id="toggleButton" value="Show Code"></form>
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{run} \PYZdq{}C:\PYZbs{}Users\PYZbs{}BILHA\PYZbs{}Google Drive\PYZbs{}xRepos\PYZbs{}xUtilz\PYZbs{}\PYZbs{}utilz\PYZus{}only\PYZus{}loader.ipynb\PYZdq{}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{db} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{181106\PYZus{}Referral\PYZus{}Reasons.csv}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+        \PY{c+c1}{\PYZsh{}db.head(5)}
+        \PY{c+c1}{\PYZsh{}db.dtypes}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Add Category column for Referral Reasons}
+        \PY{n}{reasons\PYZus{}groupz} \PY{o}{=} \PY{p}{\PYZob{}} 
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Neonates}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{p}{[} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{months}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{umbilical}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} 
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pregnancy}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{delivery}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} 
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{U5 Danger Signs}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{p}{[} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Danger}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Diarrhoea}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Diarrhea}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dairrhea}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Coughing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fever}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pneumonia}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{HIVST}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{reactive}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{partner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{intimate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} 
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unsupported Cases}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{p}{[}\PY{p}{]}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reason for Referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Referral Reason}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{searchString}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{reasons\PYZus{}groupz}\PY{p}{)} \PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} 1. set Date of referral to a datetime type }
+        \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date of referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(} \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date of referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n+nb}{format}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{b\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} inplace=True)}
+        
+        \PY{c+c1}{\PYZsh{} 2. Extract Month and year categories }
+        \PY{c+c1}{\PYZsh{}db[\PYZdq{}Month\PYZus{}Number\PYZdq{}] = db[\PYZdq{}Date of referral\PYZdq{}].dt.month}
+        \PY{c+c1}{\PYZsh{}db[\PYZdq{}Month\PYZus{}Name\PYZdq{}] = db[\PYZdq{}Date of referral\PYZdq{}].dt.strftime(\PYZsq{}\PYZpc{}b\PYZsq{})}
+        \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date of referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{year} 
+        \PY{c+c1}{\PYZsh{}db[\PYZdq{}Month\PYZus{}Period\PYZdq{}] = db[\PYZdq{}Date of referral\PYZdq{}].dt.to\PYZus{}period(\PYZsq{}M\PYZsq{}) \PYZsh{} M \PYZhy{} month period in \PYZsh{}  pd.to\PYZus{}datetime( }
+        \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date of referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+        \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Day\PYZus{}of\PYZus{}Week}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date of referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{weekday\PYZus{}name} 
+        
+        \PY{n}{db}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(} \PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date of referral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n}{LAST\PYZus{}UPDATED} \PY{o}{=} \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date of referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{strftime}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{b\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{The Data}\label{the-data}
+
+Here's a glimpse at the data being analyzed - Grouping by CU and some
+CHV trait is not possible yet b/c there are no mappings for that yet. -
+Referral reason and Timing of the referral are the main perspectives
+
+Updates - The dataset will get updated weekly. - This data covers the
+period 22-Aug-2018 to \{\{LAST\_UPDATED\}\}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A glimpse at a sample of the data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{db}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+A glimpse at a sample of the data
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}    Date of referral               CHV Name     CHV Phone    Patient Name  \textbackslash{}
+        88       2018-08-23     Evalyn Moraa Peter  2.547400e+11  Frank  Vincent   
+        43       2018-09-25        Salome Kenyanya  2.547400e+11   Fridah  Moses   
+        96       2018-08-27     Jane Nariaka David  2.547400e+11  Maurine Okemea   
+        13       2018-09-19  Alice Nyaboke Kengere  2.547400e+11   Gladys Moturi   
+        54       2018-10-29     Salome Osebe Chogo  2.547400e+11  Lanex Onyancha   
+        
+                                       Referral Reason Reason for Referral  Year  \textbackslash{}
+        88                       Diarrhoea for 3 days,     U5 Danger Signs  2018   
+        43  Headache and  vomiting  everything,  cough   Unsupported Cases  2018   
+        96                                         NaN         No Response  2018   
+        13                                         NaN         No Response  2018   
+        54                                        Burn   Unsupported Cases  2018   
+        
+             Month Day\_of\_Week  
+        88  Aug-18    Thursday  
+        43  Sep-18     Tuesday  
+        96  Aug-18      Monday  
+        13  Sep-18   Wednesday  
+        54  Oct-18      Monday  
+\end{Verbatim}
+            
+    \section{Digital Referral Numbers - As at
+\{\{LAST\_UPDATED\}\}}\label{digital-referral-numbers---as-at-last_updated}
+
+    \subsection{Reasons for Referrals}\label{reasons-for-referrals}
+
+n = \{\{len(db)\}\}
+
+\subsubsection{Approach:}\label{approach}
+
+A quick categorization of the open-ended reason for referral field.
+Categories are based on - Danger Signs: ICCM cases get a referral if
+there's a danger sign - Neonates: All kids under 2 months get a referral
+after a '+ve' assessment - Pregnancy: Pregnancy related cases during
+ANC/PNC follow ups - HIVST: Referrals specific to HIVST linkage -
+Unsupported: Non-LG supported cases. Primarily generated by the
+'free-form' digital referral form, which is a catch-all
+
+\subsubsection{Findings:}\label{findings}
+
+Note: Small sample size for sub-groups
+
+\textbf{Potentially Increasing Uptake:} Number of referrals have an
+increasing pattern over the three months. For instance, the proportion
+of referrals increase from 35\% to 47\% from September to October. -
+\textbf{Questions:} - We'll keep watch on if this continues to grow. -
+Need to add data on the average referrals per CHV per month and the \%
+of CHVs with referral activities for more perspective.
+
+\textbf{High \# Unsupported Case:} Unsupported cases make up 46\% of the
+referrals. They top the reason for referral. - ICCM danger signs come
+second with 33\% of the referrals. - When we started in August, ICCM
+cases were the most. However, August activity was for 2 weeks or less. -
+Cannibalization: The average number of referrals per CHV per month is
+about 2, which is inline with the main program expectations. So if there
+are high unsupported cases without an increase in the average number of
+referrals per CHV per month, then CHVs are likely swapping referral
+activity at the expense of the MNCH focus areas. - Note though, this is
+based on a loose view of the open-ended text input for this variable
+with a quick scan for sensibility.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Questions:} Follow up questions are
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Is there main program data for unsupported cases? So far, this is a
+    no - main program 2 - 3 referral targets are for MNCH focus areas.
+  \item
+    Qualitative follow up on why.
+  \end{itemize}
+\end{itemize}
+
+\textbf{Monday and Thursdays are most active:} Most of the referrals are
+generated on a Monday or Thursday. - There seems to be two moments of
+activition, Monday and Thursday, and with a declining trend for each -
+ICCM referral activity is most on Mondays and Fridays. - Neonate
+activity is most on Mondays and all 6 cases happen in the first moment.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Questions:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Relate to the high number of unsupported cases.
+  \item
+    Relate to ICCM, Neonate and Pregnancy targets per CHV per month for
+    cannibalization particularly
+  \end{itemize}
+\end{itemize}
+
+    \paragraph{Referral Numbers}\label{referral-numbers}
+
+A total of \{\{len(db)\}\} referrals as at \{\{LAST\_UPDATED\}\}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Unsupported cases are the main reason for referral
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This is as per a general categorization
+  \item
+    See the word clouds for word specific frequencies
+  \end{itemize}
+\item
+  Potential cannibalization of MNCH referral activity by general
+  referral
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Digital referral has a workflow for general cases
+  \item
+    The average number of referrals per CHV per month doesn't seem to
+    have changed with digital referral; we're at 2 referrals per CHV per
+    month, which is similar to baseline.
+  \item
+    So, if the main program doesn't record general referral cases, then
+    we're potentially seeing some cannibalizatin of MNCH activity.
+    However, this doesn't take into account the following, which ought
+    to be investigated.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Number of assessments made by trial group compared to baseline and
+      control. Baseline proportions were that about 16\% of assessments
+      resulted in a referral. The targets have been 16 assessments per
+      CHV per month.
+    \item
+      Interaction of incentives. What incentives is referral activity
+      sort of back-filling for? The referral f/u activity on the
+      dashboard, however, is low at below 20\% (target is 85\%).
+    \item
+      Data quality: Is digital referral bring out data quality issues
+      (e.g. with referral f/u targets or referral numbers) that we could
+      not capture with the manual process?
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}b\PYZgt{}Number of Referrals by Reason for Referral\PYZlt{}/b\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{t} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(} \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reason for Referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{margins}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{}, margins\PYZus{}name=\PYZdq{}Total Referrals\PYZdq{})}
+        \PY{n}{t}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{} of referrals}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Referrals}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{t}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Reason for Referral  HIVST  Neonates  No Response  Pregnancy  U5 Danger Signs  \textbackslash{}
+        \# of referrals           3         6           11          1               32   
+        
+        Reason for Referral  Unsupported Cases  All  
+        \# of referrals                      45   98  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Count of reasons for referral based on the broad categories}
+        \PY{n}{plotObject}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(} \PY{n}{data}\PY{o}{=}\PY{n}{db}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reason for Referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reason for Referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index} \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} set \PYZpc{} }
+        \PY{n}{total} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(} \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reason for Referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{ax}\PY{o}{.}\PY{n}{patches}\PY{p}{:}
+            \PY{n}{height} \PY{o}{=} \PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}height}\PY{p}{(}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}x}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}width}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{2.}\PY{p}{,}
+                    \PY{n}{height} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:1.0f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{height}\PY{o}{/}\PY{n}{total}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{ha}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+            
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Reasons for Referral as at }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}} \PY{n}{LAST\PYZus{}UPDATED} \PY{p}{)} \PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Timing of Referrals}\label{timing-of-referrals}
+
+    Looking at when the referrals happen and if any preferrences for
+different reasons for referrals
+
+\begin{itemize}
+\tightlist
+\item
+  Digital referral went live on 22-Aug.
+\item
+  HIVST referral went live on 24-Oct
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The number of referrals recorded seems to be increasing over time
+
+  \begin{itemize}
+  \tightlist
+  \item
+    There are more referrals in subsequent months. However, this is only
+    2.5 months of data so far. Let's see how that holds up
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Do we have more referral activity now or is this just the pilot
+      picking up? Another analysis suggests that about 84\% of the main
+      program CHVs have a referral activity the period Nov-2017 to
+      Mar-2018. The trial CHVs has 90\% of the CHVs with referral
+      activity
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} 1.a. referrals by Month}
+        \PY{n}{plotObject}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(} \PY{n}{data}\PY{o}{=}\PY{n}{db}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Month}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)} 
+        \PY{c+c1}{\PYZsh{} set \PYZpc{} }
+        \PY{n}{total} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(} \PY{n}{db}\PY{p}{)}
+        \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{ax}\PY{o}{.}\PY{n}{patches}\PY{p}{:}
+            \PY{n}{height} \PY{o}{=} \PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}height}\PY{p}{(}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}x}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}width}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{2.}\PY{p}{,}
+                    \PY{n}{height} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:1.0f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{height}\PY{o}{/}\PY{n}{total}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{ha}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+            
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Referrals by Month as at }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}} \PY{n}{LAST\PYZus{}UPDATED} \PY{p}{)} \PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} 1.b referrals by Month and by reason }
+        \PY{n}{plotObject}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(} \PY{n}{data}\PY{o}{=}\PY{n}{db}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Month}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reason for Referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{)}  
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Referrals by Month as at }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}} \PY{n}{LAST\PYZus{}UPDATED}\PY{p}{)} \PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Most of the referrals were on Mondays and Thursdays. What could this
+  say about CHV prioritization?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ICCM cases have more referrals on Mondays and Fridays
+  \item
+    Neonate cases have more referrals on Mondays and all 6 cases happen
+    in the Mon - Wed moment.
+  \end{itemize}
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} 2. Referrals by Day of the Week}
+         \PY{n}{plotObject}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(} \PY{n}{data}\PY{o}{=}\PY{n}{db}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Day\PYZus{}of\PYZus{}Week}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{order}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sunday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Monday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tuesday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wednesday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Thursday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Friday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Saturday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{p}{)}
+         \PY{c+c1}{\PYZsh{} set \PYZpc{} }
+         \PY{n}{total} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(} \PY{n}{db}\PY{p}{)}
+         \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{ax}\PY{o}{.}\PY{n}{patches}\PY{p}{:}
+             \PY{n}{height} \PY{o}{=} \PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}height}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}x}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}width}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{2.}\PY{p}{,}
+                     \PY{n}{height} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:1.0f\PYZcb{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{height}\PY{o}{/}\PY{n}{total}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{ha}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+             
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Referrals by Day of Week as at }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}} \PY{n}{LAST\PYZus{}UPDATED} \PY{p}{)} \PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} 3. Referrals by Day of Week and Reason for Referral }
+         \PY{c+c1}{\PYZsh{}plotObject( nc=3)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Referrals by Day of Week as at }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}} \PY{n}{LAST\PYZus{}UPDATED}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{FacetGrid}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{db}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reason for Referral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{aspect} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{col\PYZus{}wrap}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{.}\PY{n}{map}\PY{p}{(} 
+             \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Day\PYZus{}of\PYZus{}Week}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{n}{palette}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{muted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+             \PY{n}{order}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sunday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Monday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tuesday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wednesday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Thursday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Friday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Saturday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{p}{)}\PY{p}{;} \PY{c+c1}{\PYZsh{}.add\PYZus{}legend()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\# Referrals by Day of Week as at 29-Oct-2018
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Word Cloud}\label{word-cloud}
+
+Translation for Swahili to English not done. Number of swahili entries
+are few, though
+
+\begin{itemize}
+\tightlist
+\item
+  U5 related cases are most pronounced. E.G. diarrhoea, fever, cough
+\item
+  Words like 'month, two, old, health facility' relate to description of
+  neonates and the requirement that they should be referral
+\item
+  Phrases with the word 'week'
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} stop words \PYZhy{} use built in set of words }
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Translating Swahili to Eng }
+         \PY{n}{plotObject}\PY{p}{(} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(} \PY{n}{WordCloud}\PY{p}{(} \PY{n}{background\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{white}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{max\PYZus{}font\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{max\PYZus{}words}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,}
+                              \PY{p}{)}\PY{o}{.}\PY{n}{generate}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(} \PY{n}{db}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Referral Reason}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{p}{)} \PY{p}{)} \PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bilinear}\PY{l+s+s1}{\PYZsq{}}  \PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{off}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;} 
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} where referral reason contains \PYZsq{}week\PYZsq{}}
+         \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}h5\PYZgt{}Referral reasons with the word \PYZlt{}i\PYZgt{}week\PYZlt{}/i\PYZgt{} \PYZlt{}/h5\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{db}\PY{p}{[} \PY{n}{db}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Referral Reason}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WEEK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{na}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{case}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{p}{]} 
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}    Date of referral                 CHV Name     CHV Phone   Patient Name  \textbackslash{}
+         36       2018-09-27  Eunice Nyambune Machogu  2.547400e+11    Anna Ombiro   
+         30       2018-10-01       Evalyn Moraa Peter  2.547400e+11         Shalon   
+         91       2018-10-01       Evalyn Moraa Peter  2.547400e+11  Shadrak Omoga   
+         59       2018-10-01       Evalyn Moraa Peter  2.547400e+11  Shadrak Omoga   
+         49       2018-10-05     Juliah Kerubo Mogeni  2.547400e+11  Jones  Zaboln   
+         8        2018-10-08       Salome Osebe Chogo  2.547400e+11   Idea Nyaboke   
+         
+                                  Referral Reason Reason for Referral  Year   Month  \textbackslash{}
+         36             Cough morer than one week   Unsupported Cases  2018  Sep-18   
+         30       Diarrhoea for two weeks or more     U5 Danger Signs  2018  Oct-18   
+         91        Diarrhoea for 2 weeks or more,     U5 Danger Signs  2018  Oct-18   
+         59      Diarrhoea  for two weeks or more     U5 Danger Signs  2018  Oct-18   
+         49         Cough for 2weeks and Neumonia   Unsupported Cases  2018  Oct-18   
+         8   Fever for 1 - 2 weeks, Danger Signs,     U5 Danger Signs  2018  Oct-18   
+         
+            Day\_of\_Week  
+         36    Thursday  
+         30      Monday  
+         91      Monday  
+         59      Monday  
+         49      Friday  
+         8       Monday  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Where referral reason contains \PYZsq{}finger or pain\PYZsq{} }
+         \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}h5\PYZgt{}Referral reasons with the word \PYZlt{}i\PYZgt{}finger\PYZlt{}/i\PYZgt{} \PYZlt{}/h5\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{db}\PY{p}{[} \PY{n}{db}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Referral Reason}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Finger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{na}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{case}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{p}{]} 
+         
+         
+         \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}h5\PYZgt{}Referral reasons with the word \PYZlt{}i\PYZgt{}pain\PYZlt{}/i\PYZgt{} \PYZlt{}/h5\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{For example, \PYZlt{}ul\PYZgt{} \PYZlt{}li\PYZgt{}Rows 46, 68 and 19 could relate to pregnancy or general cases but we cannot tell from the data\PYZlt{}/li\PYZgt{} \PYZlt{}/ul\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{db}\PY{p}{[} \PY{n}{db}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Referral Reason}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{na}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{case}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{p}{]} 
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:}    Date of referral                CHV Name     CHV Phone    Patient Name  \textbackslash{}
+         37       2018-09-17  Winfridah Kerubo Moses  2.547400e+11    Norah Swanya   
+         28       2018-09-27      Evalyn Moraa Peter  2.547400e+11  Salome Onchiri   
+         61       2018-09-27      Evalyn Moraa Peter  2.547400e+11  Salome Onchiri   
+         
+                                    Referral Reason Reason for Referral  Year   Month  \textbackslash{}
+         37                        Finger nail ache   Unsupported Cases  2018  Sep-18   
+         28   She is feeling pain on is left finger   Unsupported Cases  2018  Sep-18   
+         61  She is feeling pain on is  left finger   Unsupported Cases  2018  Sep-18   
+         
+            Day\_of\_Week  
+         37      Monday  
+         28    Thursday  
+         61    Thursday  
+\end{Verbatim}
+            
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:}    Date of referral              CHV Name     CHV Phone          Patient Name  \textbackslash{}
+         46       2018-09-06  Rachel Kemunto Mokua  2.547400e+11           Moraa Rioba   
+         28       2018-09-27    Evalyn Moraa Peter  2.547400e+11        Salome Onchiri   
+         61       2018-09-27    Evalyn Moraa Peter  2.547400e+11        Salome Onchiri   
+         60       2018-10-16  Rachel Kemunto Mokua  2.547400e+11          Elijah  Babu   
+         58       2018-10-24    Jane Nariaka David  2.547400e+11          Caro Ayiecha   
+         19       2018-10-26  Nivah Gesare Onyando  2.547400e+11  Hellen  Kerubo  Luka   
+         
+                                    Referral Reason Reason for Referral  Year   Month  \textbackslash{}
+         46                            Stomach pain   Unsupported Cases  2018  Sep-18   
+         28   She is feeling pain on is left finger   Unsupported Cases  2018  Sep-18   
+         61  She is feeling pain on is  left finger   Unsupported Cases  2018  Sep-18   
+         60                Coughing with chest pain     U5 Danger Signs  2018  Oct-18   
+         58                  Severe abdominal pains   Unsupported Cases  2018  Oct-18   
+         19                 Severe  abnorminal pain   Unsupported Cases  2018  Oct-18   
+         
+            Day\_of\_Week  
+         46    Thursday  
+         28    Thursday  
+         61    Thursday  
+         60     Tuesday  
+         58   Wednesday  
+         19      Friday  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Where referral reason cotains \PYZsq{}stomach\PYZsq{}}
+         \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}h5\PYZgt{}Referral reasons with the word \PYZlt{}i\PYZgt{}stomach\PYZlt{}/i\PYZgt{} \PYZlt{}/h5\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{db}\PY{p}{[} \PY{n}{db}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Referral Reason}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stoma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{na}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{case}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{p}{]} 
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}    Date of referral              CHV Name     CHV Phone        Patient Name  \textbackslash{}
+         35       2018-08-23    Evalyn Moraa Peter  2.547400e+11         Peris jebet   
+         46       2018-09-06  Rachel Kemunto Mokua  2.547400e+11         Moraa Rioba   
+         64       2018-09-06       Salome Kenyanya  2.547400e+11  Spinicah  Bosibori   
+         51       2018-10-02    Jane Nariaka David  2.547400e+11      Hyvone Nyabate   
+         
+                                           Referral Reason Reason for Referral  Year  \textbackslash{}
+         35                         Stomachhach \$ dairrhea     U5 Danger Signs  2018   
+         46                                   Stomach pain   Unsupported Cases  2018   
+         64                             Stomach and voting   Unsupported Cases  2018   
+         51  Complaining of stomach problem and looks weak   Unsupported Cases  2018   
+         
+              Month Day\_of\_Week  
+         35  Aug-18    Thursday  
+         46  Sep-18    Thursday  
+         64  Sep-18    Thursday  
+         51  Oct-18     Tuesday  
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
