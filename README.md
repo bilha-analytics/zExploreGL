@@ -2,7 +2,7 @@
 
 ## IN Manenoz
 
-1. [Referral Reasons - 30-Oct-2018](http://bit.ly/IN_ReferralReasons2)
+1. [Referral Reasons - 30-Oct-2018](http://bit.ly/Referral_Reasons_IN)
 2. 
 
 
